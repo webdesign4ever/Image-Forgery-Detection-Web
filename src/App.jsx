@@ -1,4 +1,9 @@
 import { useState, useRef } from "react";
+import { MdFeaturedPlayList } from "react-icons/md";
+import { MdOutlineAddPhotoAlternate } from "react-icons/md";
+import { GiProcessor } from "react-icons/gi";
+import { AiOutlineHeatMap } from "react-icons/ai";
+import { RiListUnordered } from "react-icons/ri";
 
 function App() {
   const [selectedFile, setSelectedFile] = useState();
@@ -90,68 +95,163 @@ function App() {
 
   return (
     <>
-      <h1>Image Forgery Detection</h1>
-      <div className="form">
-        <form
-          id="uploadForm"
-          method="post"
-          onSubmit={handleSubmit}
-          encType="multipart/form-data"
-        >
-          <label htmlFor="fileInput">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="26"
-              height="26"
-              fill="currentColor"
-              className="bi bi-cloud-arrow-up-fill"
-              viewBox="0 0 16 16"
-            >
-              <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2m2.354 5.146a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0z" />
-            </svg>
-            <span>Upload Image</span>
-          </label>
-
-          <input
-            type="file"
-            id="fileInput"
-            accept=".jpg, .jpeg, .png"
-            onChange={handleFileChange}
-          />
-
-          {selectedFile && (
-            <input
-              type="submit"
-              id="submit"
-              value={isPredicting ? "Loading..." : "Predict"}
-              disabled={isPredicting}
-            />
-          )}
-        </form>
+      <div className="header rowdies-regular">
+        <h1>Image Forgery Detection</h1>
       </div>
-
-      <div className="predict">
-        {result && (
-          <div className="result">
-            <div>Prediction: {result}</div>
-            {confidence && <div>Confidence: {confidence}%</div>}
-          </div>
-        )}
-        <div className="img">
-          <img
-            id="uploadedImage"
-            src={imageSrc}
-            style={{ display: imageSrc ? "block" : "none" }}
-          />
-
-          <img
-            id="heatmapImage"
-            src={heatmapSrc}
-            style={{ display: heatmapSrc ? "block" : "none" }}
-          />
+      <section className="forgery-types">
+        <div>
+          <p>
+            The system utilizes CNNs to automatically identify three common
+            image forgeries:
+          </p>
+          <ul className="features-list">
+            <li>
+              <div className="icon">
+                <MdFeaturedPlayList size={25} />
+              </div>
+              IMAGE SPLICING
+            </li>
+            <li>
+              <div className="icon">
+                <MdFeaturedPlayList size={25} />
+              </div>
+              COPY-MOVE FORGERY
+            </li>
+            <li>
+              <div className="icon">
+                <MdFeaturedPlayList size={25} />
+              </div>
+              OBJECT REMOVAL
+            </li>
+          </ul>
         </div>
-        &nbsp;
-      </div>
+      </section>
+      <section className="process-ctn">
+        <h1 className="heading-primary">PROCESS</h1>
+        <div className="process">
+          <div className="process-step">
+            <h1 className="process-icon heading-secondary">
+              <span>
+                <GiProcessor size={40} />
+              </span>
+              Data Preprocessing
+            </h1>
+            <p>
+              Input images are preprocessed (e.g., resizing) for compatibility
+              with the CNN.
+            </p>
+          </div>
+          <div className="process-step">
+            <h1 className="process-icon heading-secondary">
+              <span>
+                <MdFeaturedPlayList size={40} />
+              </span>
+              Feature Extraction
+            </h1>
+            <p>
+              CNNs are employed to automatically extract features from the
+              images. These features capture inconsistencies introduced during
+              forgery
+            </p>
+          </div>
+          <div className="process-step">
+            <h1 className="process-icon heading-secondary">
+              <span>
+                <RiListUnordered size={40} />
+              </span>
+              Classification
+            </h1>
+            <p>The extracted features are used to train a classifier</p>
+          </div>
+          <div className="process-step">
+            <h1 className="process-icon heading-secondary">
+              <span>
+                <AiOutlineHeatMap size={40} />
+              </span>
+              GRADCAM Heatmap
+            </h1>
+            <p>
+              Grad-CAM generates a heatmap highlighting the image regions that
+              the CNN model found most influential for its classification.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className="forgery-detection-system">
+        <h1>Got An Image? Try Our Forgery Detection System Right Away</h1>
+        <div className="form">
+          <form
+            id="uploadForm"
+            method="post"
+            onSubmit={handleSubmit}
+            encType="multipart/form-data"
+          >
+            <label htmlFor="fileInput">
+              <div className="photo-icon">
+                <MdOutlineAddPhotoAlternate size={40} />
+              </div>
+              <div className="upload-btn">Upload Image</div>
+            </label>
+
+            <input
+              type="file"
+              id="fileInput"
+              accept=".jpg, .jpeg, .png"
+              onChange={handleFileChange}
+            />
+
+            <div className="img">
+              <div className="uploadedImage">
+                <img
+                  id="uploadedImage"
+                  src={imageSrc}
+                  style={{ display: imageSrc ? "block" : "none" }}
+                />
+              </div>
+
+              {selectedFile && (
+                <input
+                  type="submit"
+                  id="submit"
+                  value={isPredicting ? "Loading..." : "Predict"}
+                  disabled={isPredicting}
+                />
+              )}
+              <div className="heatmapImage">
+                <img
+                  id="heatmapImage"
+                  src={heatmapSrc}
+                  style={{ display: heatmapSrc ? "block" : "none" }}
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div className="predict">
+          {result && (
+            <div className="result">
+              <table>
+                <tr>
+                  <td>
+                    <div>Prediction:</div>
+                  </td>
+                  <td>
+                    <div> {result}</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div>Confidence: </div>
+                  </td>
+                  <td>{confidence && <div>{confidence}%</div>}</td>
+                </tr>
+              </table>
+            </div>
+          )}
+          &nbsp;
+        </div>
+      </section>
     </>
   );
 }
