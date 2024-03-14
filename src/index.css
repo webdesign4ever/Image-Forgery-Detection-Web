@@ -117,6 +117,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  /* flex-wrap: wrap; */
 }
 
 .img #uploadedImage {
@@ -133,12 +134,12 @@ html {
 
 .img .uploadedImage {
   border-radius: 20px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .img .heatmapImage {
   border-radius: 20px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .result {
@@ -162,6 +163,7 @@ html {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .process-step {
@@ -201,8 +203,26 @@ p {
   margin-right: 0.5rem;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
   .img {
     flex-direction: column;
+  }
+
+  /* .img #uploadedImage {
+    width: 24rem;
+  }
+
+  .img #heatmapImage {
+    width: 24rem;
+  } */
+}
+
+@media only screen and (max-width: 600px) {
+  .img #uploadedImage {
+    width: 24rem;
+  }
+
+  .img #heatmapImage {
+    width: 24rem;
   }
 }
