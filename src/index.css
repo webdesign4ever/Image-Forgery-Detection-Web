@@ -15,11 +15,6 @@
   font-style: normal;
 }
 
-/* *,
-*::before,
-*::after {
-} */
-
 body {
   margin: 0;
   padding: 0;
@@ -162,12 +157,26 @@ html {
 .process {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
   justify-content: center;
 }
 
+.process > * {
+  margin: 1rem;
+}
+
 .process-step {
   padding: 2rem;
+  background-color: #86bbd8;
+  border-radius: 20px;
+  transition: all 0.4s ease-in-out;
+}
+
+.process-step:hover {
+  background-color: #eee;
+  outline: 1px solid #33658a;
+  cursor: pointer;
 }
 
 .process-step p {
